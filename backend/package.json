@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "backend for expense tracker assignment",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development nodemon src/server.js",
+    "start": "cross-env NODE_ENV=production node src/server.js"
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
