@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": "PORT",
+    "jwtSecret": "JWT_SECRET"
+  },
+  "mysqlDB": {
+    "port": "DB_PORT",
+    "name": "DB_NAME",
+    "user": "DB_USER",
+    "password": "DB_PASSWORD",
+    "ssl": "DB_SSL"
+  }
+}
