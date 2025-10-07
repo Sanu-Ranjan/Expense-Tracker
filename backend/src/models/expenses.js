@@ -14,6 +14,11 @@ const Expense = database.define("expenses", {
       isDate,
     },
   },
+  amount: {
+    type: DataTypes.DECIMAL(30, 2),
+    allowNull: false,
+    defaultValue: 0.0,
+  },
   isDebit: {
     type: DataTypes.ENUM("true", "false"),
     defaultValue: "true",
