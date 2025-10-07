@@ -1,7 +1,7 @@
 const { database } = require("../database/connection");
 const { DataTypes } = require("sequelize");
 
-const toDo = database.define("toDos", {
+const ToDo = database.define("toDos", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -21,5 +21,5 @@ const toDo = database.define("toDos", {
 });
 
 module.exports = {
-  toDo,
+  ToDo,
 };
