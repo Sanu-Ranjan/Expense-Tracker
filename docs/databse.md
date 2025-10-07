@@ -35,6 +35,7 @@
 - id (PK)
 - date
 - isDebit
+- amount
 - description
 - accounts (FK-> Accounts.id)
 - profileId (FK-> Profiles.id)
