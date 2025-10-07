@@ -5,9 +5,10 @@ let missing = false;
 
 for (let key of keys) {
   for (let configKey of Object.keys(config[key])) {
-    if (!config[key][configKey])
+    if (!config[key][configKey]) {
       console.log(`fatal error: missing ${key} ${configKey}`);
-    missing = true;
+      missing = true;
+    }
   }
 }
 
