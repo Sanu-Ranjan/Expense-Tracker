@@ -1,7 +1,7 @@
 require("../config/check");
 const { app } = require("./app");
 const { database } = require("./database/connection");
-
+require("./models");
 const port = process.env.PORT || 3000;
 
 (async () => {
