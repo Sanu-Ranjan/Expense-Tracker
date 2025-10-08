@@ -9,6 +9,6 @@
     "user": "",
     "password": "",
     "host": "",
-    "ssl": ""
+    "caCert": ""
   }
 }
