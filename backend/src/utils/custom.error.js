@@ -1,5 +1,7 @@
-const customError = ({ message, origin, status } = {}) => {
-  const errorObj = new Error(message);
+const customError = ({ message, origin, status } = {}, errorObj = null) => {
+  if (!errorObj) {
+    errorObj = new Error(message);
+  }
   errorObj.origin = origin;
   errorObj.status = status;
   errorObj.timeStamp = new Date();
