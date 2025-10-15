@@ -60,12 +60,10 @@ const getProfileById = async (req, res, next) => {
     );
 
     if (error) {
-      error.origin = "profile routes: getProfileById ";
-      error.message = "sequelize error";
-      throw error;
+      throw customError({ origin: "Profile routes: getProfileById" });
     }
 
-    res.send(404).json(sendResponse.success("Profiles fetched", data));
+    res.send(404).json(sendResponse.success("Profile fetched", data));
   } catch (error) {
     next(error);
   }
