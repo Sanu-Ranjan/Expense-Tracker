@@ -11,7 +11,7 @@
 - id (PK)
 - profileName
 - profilePurpose
-- additionalInformation
+- additionalInfo
 - userId (FK-> Users.id)
 
 ### Accounts
