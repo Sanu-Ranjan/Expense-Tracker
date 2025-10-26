@@ -10,7 +10,7 @@ const getProfiles = async (req, res, next) => {
     if (!userId) {
       const error = customError({
         message: "User id not detected",
-        origin: "profile routes: getProfiles",
+        origin: "profile route: getProfiles",
         status: 500,
       });
       throw error;
@@ -23,7 +23,7 @@ const getProfiles = async (req, res, next) => {
       })
     );
     if (error) {
-      error.origin = "profile routes: getProfiles ";
+      error.origin = "profile route: getProfiles ";
       error.message = "sequelize error";
       throw error;
     }
@@ -39,7 +39,7 @@ const getProfileById = async (req, res, next) => {
     if (!userId) {
       const error = customError({
         message: "User id not detected",
-        origin: "profile routes: getProfileById",
+        origin: "profile route: getProfileById",
         status: 500,
       });
       throw error;
@@ -60,7 +60,7 @@ const getProfileById = async (req, res, next) => {
     );
 
     if (error) {
-      throw customError({ origin: "Profile routes: getProfileById" });
+      throw customError({ origin: "Profile route: getProfileById" });
     }
 
     res.send(404).json(sendResponse.success("Profile fetched", data));
@@ -75,7 +75,7 @@ const addProfile = async (req, res, next) => {
     if (!userId) {
       const error = customError({
         message: "User id not detected",
-        origin: "profile routes: addProfile",
+        origin: "profile route: addProfile",
         status: 500,
       });
       throw error;
@@ -97,7 +97,7 @@ const addProfile = async (req, res, next) => {
       Profile.create({ profileName, profilePurpose, additionalInfo })
     );
 
-    if (error) throw customError({ origin: "Profile routes: addProfile" });
+    if (error) throw customError({ origin: "Profile route: addProfile" });
 
     res.status(200).json(sendResponse.success("Profile created", data));
   } catch (error) {
