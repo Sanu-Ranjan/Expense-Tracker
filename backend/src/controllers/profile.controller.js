@@ -2,7 +2,7 @@ const { customError } = require("../utils/custom.error");
 const { safeQuery } = require("../utils/safeQuerry.wrapper");
 const { Profile } = require("../models");
 const { sendResponse } = require("../utils/sendResponse");
-const { schemas } = require("../utils/validate.with.joi");
+const { schemas, validate } = require("../utils/validate.with.joi");
 
 const getProfiles = async (req, res, next) => {
   try {
@@ -105,8 +105,88 @@ const addProfile = async (req, res, next) => {
   }
 };
 
+const updateProfile = async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      const error = customError({
+        message: "User id not detected",
+        origin: "profile route: updateProfile",
+        status: 500,
+      });
+      throw error;
+    }
+
+    const { profileId, profileName, profilePurpose, additionalInfo } = req.body;
+
+    const result = validate({ profileId: Joi.number() }, { profileId });
+
+    if (result.err)
+      return res.status(400).json(sendResponse.fail(err.details[0].message));
+
+    const { error: err } = schemas.profile.validate({
+      profileName,
+      profilePurpose,
+      additionalInfo,
+    });
+
+    if (err)
+      return res
+        .status(400)
+        .json(sendResponse.fail("Invalid data", err.details[0].message));
+
+    const { error, data } = await safeQuery(
+      Profile.update(
+        {
+          profileName: profileName,
+          profilePurpose: profilePurpose,
+          additionalInfo: additionalInfo,
+        },
+        { where: { id: profileId, userId: userId } }
+      )
+    );
+
+    if (error) throw customError({ origin: "Profile route: updateProfile" });
+
+    res.status(200).json(sendResponse.success("Profile updated", data));
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteProfile = async (req, res, next) => {
+  try {
+    const userId = req.user?.id;
+    if (!userId) {
+      const error = customError({
+        message: "User id not detected",
+        origin: "profile route: deleteProfile",
+        status: 500,
+      });
+      throw error;
+    }
+    const { profileId } = req.body;
+
+    const result = validate({ profileId: Joi.number() }, { profileId });
+
+    if (result.err)
+      return res.status(400).json(sendResponse.fail(err.details[0].message));
+
+    const { error, data } = await safeQuery(
+      Profile.destroy({ where: { id: profileId, userId: userId } })
+    );
+    if (error) throw customError({ origin: "Profile route: deleteProfile" });
+
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getProfiles,
   getProfileById,
   addProfile,
+  updateProfile,
+  deleteProfile,
 };

@@ -1,5 +1,10 @@
 const Joi = require("joi");
 
+function validate(schema, valueObject) {
+  const { error, value } = Joi.object(schema).validate(valueObject);
+  return { err: error, value };
+}
+
 const schemas = {
   user: Joi.object({
     name: Joi.string().required(),
@@ -36,4 +41,5 @@ const schemas = {
 
 module.exports = {
   schemas,
+  validate,
 };
