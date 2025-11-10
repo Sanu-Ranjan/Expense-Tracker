@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/v1/profiles", profileRoutes.router);
-app.use("api/v1/profiles", accountRoutes.router);
+app.use("/api/v1/profiles", accountRoutes.router);
 
 app.use(errorHandler);
 
