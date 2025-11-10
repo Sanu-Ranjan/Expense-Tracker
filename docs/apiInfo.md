@@ -17,8 +17,8 @@
 **Accounts Routes(Protected)** (`/api/v1/accounts`)
 
 - `GET "/:profileId"` - list all user accounts under given profile
-- `POST "/:profileId"` - add new account under given profile
-- `DELETE "/:accountId"` - delete account
+- `POST "/"` - add new account under given profile
+- `DELETE "/"` - delete account
 
 **ToDo routes(Protected)** (`/api/v1/todo`)
 
